@@ -1,12 +1,17 @@
+import java.util.Arrays;
+
 public class Contact {
     private String name;
     private String surname;
     private String number;
 
     public Contact(String name, String surname, String number) {
-        this.name = name;
-        this.surname = surname;
-        this.number = number;
+        setName(name);
+        setSurname(surname);
+        setNumber(number);
+        getName();
+        getSurname();
+        getNumber();
     }
 
     public void setName(String name) {
@@ -32,12 +37,18 @@ public class Contact {
     public String getSurname() {
         return surname;
     }
+
+    @Override
+    public String toString() {
+        return name + " " + surname + ", номер телефона: " + number;
+    }
+
     public void checkName(){
         if(this.name.isBlank()){
             System.out.println("Вы ничего не ввели в поле имя :(");
         }
     }
-    public void checkSurame(){
+    public void checkSurname(){
         if(this.surname.isBlank()){
             System.out.println("Вы ничего не ввели в поле фамилия :(");
         }

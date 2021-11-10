@@ -1,18 +1,30 @@
 
-import java.util.HashMap;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class PhoneBook {
-    HashMap<String, Contact> map = new HashMap<>();
+    Map<String, Contact> map = new ConcurrentHashMap<String, Contact>();
 
     public void addContact(String name, String surname, String number ){
         Contact contact = new Contact(name, surname, number);
         contact.checkName();
-        contact.checkSurame();
+        contact.checkSurname();
         contact.checkNumber();
-        map.put("name", contact);
-
-
+        map.put("1", contact);
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(map);
+    }
+
+    public Collection<Contact> readAllContacts(){ //возвращает все контакты, которые есть в карте.
+        return map.values();
+    }
+
+
 
 
 
