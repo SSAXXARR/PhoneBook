@@ -45,23 +45,23 @@ public class Contact {
 
     public void checkName(){
         if(this.name.isBlank()){
-            System.out.println("Вы ничего не ввели в поле имя :(");
+            throw new RuntimeException("Вы ничего не ввели в поле \"Имя\"");
         }
     }
     public void checkSurname(){
         if(this.surname.isBlank()){
-            System.out.println("Вы ничего не ввели в поле фамилия :(");
+            throw new RuntimeException("Вы ничего не ввели в поле \"Фамилия\"");
         }
     }
     public void checkNumber(){
         if(this.number.isBlank()){
-            System.out.println("Вы ничего не ввели в поле номер :(");
+            throw new RuntimeException("Вы ничего не ввели в поле \"Номер\"");
         }
         if(this.number.length() > 12){
-            System.out.println("Введено много цифр");
+            throw new RuntimeException("Введено много цифр");
         }
         if (this.number.length() < 11){
-            System.out.println("Не хватает цифр");
+            throw new RuntimeException("Введено мало цифр");
         }
     }
 

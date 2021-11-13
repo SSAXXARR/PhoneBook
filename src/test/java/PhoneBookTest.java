@@ -1,12 +1,20 @@
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class PhoneBookTest{
+        PhoneBook contactBook; //создан непроинициализированный.
+        @BeforeAll
+        public  static void printTxt(){
+                System.out.println("Test run"); //запустится перед началом теста.
+        }
+        @BeforeEach
+        public void setup(){
+                contactBook = new PhoneBook(); // создастся для каждого метода своя.
+        }
+
         @Test
         public void CheckAddsContact(){
-                PhoneBook contactBook = new PhoneBook();
                 contactBook.addContact("Viktoria", "Surina", "89321109765");
                 System.out.println(contactBook);
                 Assertions.assertFalse(contactBook.readAllContacts().isEmpty());//проверяет пустой ли список
@@ -19,7 +27,39 @@ class PhoneBookTest{
                         && contact.getNumber().equals("89321109765"))
                         .findAny() //возвр любой подход элемент из стрима
                         .isPresent()); //существует ли объект
-
         }
+
+        @Test
+        @DisplayName("The contact has not been created, the \"surname\" variable is null")
+        public void chekSurnameRuntimeException(){
+                Assertions.assertThrows(RuntimeException.class, () ->
+                {contactBook.addContact("Vika", null, "89321109765");
+                });
+        }
+
+        @Test
+        @DisplayName("The contact has not been created, the \"name\" variable is null")
+        public void chekNameRuntimeException(){
+                Assertions.assertThrows(RuntimeException.class, () ->
+                {contactBook.addContact(null, "Surina", "89321109765");
+                });
+        }
+
+        @Test
+        @DisplayName("The contact has not been created, the \"number\" variable is null")
+        public void chekNumberRuntimeException(){
+                Assertions.assertThrows(RuntimeException.class, () ->
+                {contactBook.addContact("Vika", "Surina", null);
+                });
+        }
+        @AfterEach
+        public void after(){
+                System.out.println("AfterEach message");
+        }
+        @AfterAll
+        public static void afterAll(){
+                System.out.println("AfterAll message");
+        }
+
 
 }
