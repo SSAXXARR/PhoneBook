@@ -13,6 +13,12 @@ class PhoneBookTest{
                 //утверждает, что является ложным.
                 Assertions.assertEquals(1, contactBook.readAllContacts().size()); //проверяет, что там 1 элемент.
                 //Сравнивает 2 значения.
+                Assertions.assertTrue(contactBook.readAllContacts().stream()
+                        .filter(contact -> contact.getName().equals("Viktoria") //фильтруем записи, будут только те, кот. подходят по условию
+                        && contact.getSurname().equals("Surina")
+                        && contact.getNumber().equals("89321109765"))
+                        .findAny() //возвр любой подход элемент из стрима
+                        .isPresent()); //существует ли объект
 
         }
 
