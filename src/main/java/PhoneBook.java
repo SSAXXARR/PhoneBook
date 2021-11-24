@@ -1,6 +1,7 @@
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -9,10 +10,8 @@ public class PhoneBook {
 
     public void addContact(String name, String surname, String number ){
         Contact contact = new Contact(name, surname, number);
-        contact.checkName();
-        contact.checkSurname();
-        contact.checkNumber();
-        map.put("1", contact);
+        validateContact(contact);
+        map.put(generateKey(contact), contact);
     }
 
     @Override
@@ -24,9 +23,20 @@ public class PhoneBook {
         return map.values();
     }
 
+    private void validateContact(Contact contact){
+        contact.checkName();
+        contact.checkSurname();
+        contact.checkNumber();
+    }
 
-
-
-
-
+    private String generateKey(Contact contact) { //генератор ключа.
+        return String.format("%s-%s", contact.getName(), contact.getSurname());
+    }
 }
+
+
+
+
+
+
+

@@ -4,10 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PhoneBookTest{
         PhoneBook contactBook; //создан непроинициализированный.
-        @BeforeAll
-        public  static void printTxt(){
-                System.out.println("Test run"); //запустится перед началом теста.
-        }
         @BeforeEach
         public void setup(){
                 contactBook = new PhoneBook(); // создастся для каждого метода своя.
@@ -52,14 +48,14 @@ class PhoneBookTest{
                 {contactBook.addContact("Vika", "Surina", null);
                 });
         }
-        @AfterEach
-        public void after(){
-                System.out.println("AfterEach message");
+
+        @Test
+        public void generateKeys(){
+                contactBook.addContact("Mariya", "Morozova", "89653214568");
+                Assertions.assertTrue(contactBook.map.containsKey("Mariya-Morozova")); //есть ли в карте заданный ключ.
         }
-        @AfterAll
-        public static void afterAll(){
-                System.out.println("AfterAll message");
-        }
+
+
 
 
 }
